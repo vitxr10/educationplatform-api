@@ -1,7 +1,10 @@
 ﻿using EducationPlatform.Application.Commands.UserCommands;
+using EducationPlatform.Application.Exceptions;
+using EducationPlatform.Application.Queries.UserQueries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EducationPlatform.API.Controllers
 {
@@ -16,15 +19,31 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll(string? stringQuery)
+        public async Task<IActionResult> GetAll(string? stringQuery)
         {
-            return Ok();
+            var query = new GetAllUsersQuery();
+            query.StringQuery = stringQuery;
+
+            var users = await _mediatR.Send(query);
+
+            return Ok(users);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok();
+            try
+            {
+                var query = new GetUserByIdQuery(id);
+
+                var user = await _mediatR.Send(query);
+
+                return Ok(user);
+            }
+            catch(NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost]
@@ -36,15 +55,37 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put()
+        public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
-            return NoContent();
+            try
+            {
+                command.Id = id;
+
+                await _mediatR.Send(command);
+
+                return NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(int id)
         {
-            return NoContent();
+            try
+            {
+                var command = new DeleteUserCommand(id);
+
+                await _mediatR.Send(command);
+
+                return NoContent();
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

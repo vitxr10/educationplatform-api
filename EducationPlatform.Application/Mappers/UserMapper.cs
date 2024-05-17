@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EducationPlatform.Application.Commands.UserCommands;
+using EducationPlatform.Application.ViewModels;
 using EducationPlatform.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace EducationPlatform.Application.Mappers
         public UserMapper()
         {
             CreateMap<CreateUserCommand, User>();
+            CreateMap<User, UserDetailsViewModel>();
+            CreateMap<User, UserViewModel>();
         }
     }
 }
