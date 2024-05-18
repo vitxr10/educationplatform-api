@@ -1,8 +1,8 @@
 # API REST de uma plataforma de cursos online
 
 ## Funcionalidades e componentes do projeto: 
-- ⏳ CRUD Usuário (em andamento) 
-- CRUD Assinatura 
+- ✅ CRUD Usuário 
+- ⏳ CRUD Assinatura (em andamento) 
 - CRUD Curso 
 - CRUD Módulo 
 - CRUD Aula 
