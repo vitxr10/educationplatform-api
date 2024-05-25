@@ -1,6 +1,7 @@
 ﻿using EducationPlatform.Application.Commands.UserCommands;
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.UserQueries;
+using EducationPlatform.Application.Services;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
