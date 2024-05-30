@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EducationPlatform.Application.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,6 @@ namespace EducationPlatform.Application.ViewModels
         public string Email { get; set; }
         public string Phone { get; set; }
         public bool Active { get; set; }
+        public UserSubscriptionDTO UserSubscriptionDTO { get; set; }
     }
 }

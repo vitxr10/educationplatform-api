@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.DTOs;
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.ViewModels;
+using EducationPlatform.Core.Entities;
 using EducationPlatform.Core.Repositories;
 using MediatR;
 using System;

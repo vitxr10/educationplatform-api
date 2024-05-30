@@ -27,6 +27,7 @@ namespace EducationPlatform.Core.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? InactivatedAt { get; set; }
+        public UserSubscription UserSubscription { get; set; }
 
         public void Inativate()
         {

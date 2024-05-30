@@ -43,14 +43,14 @@ namespace EducationPlatform.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id }, command);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put()
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id)
         {
             return Ok();
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete()
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
             return Ok();
         }

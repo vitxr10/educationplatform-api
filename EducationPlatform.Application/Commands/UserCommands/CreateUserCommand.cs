@@ -15,5 +15,6 @@ namespace EducationPlatform.Application.Commands.UserCommands
         public string Password { get; set; }
         public string Phone { get; set; }
         public DateTime BirthDate { get; set; }
+        public int SubscriptionId { get; set; }
     }
 }

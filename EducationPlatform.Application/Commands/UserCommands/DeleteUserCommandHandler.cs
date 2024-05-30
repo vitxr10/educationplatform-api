@@ -25,6 +25,7 @@ namespace EducationPlatform.Application.Commands.UserCommands
                 throw new NotFoundException("Usuário");
 
             user.Inativate();
+            user.UserSubscription.Disable();
 
             await _userRepository.SaveAsync();
         }

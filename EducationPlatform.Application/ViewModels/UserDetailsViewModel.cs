@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EducationPlatform.Application.DTOs;
+using EducationPlatform.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +20,6 @@ namespace EducationPlatform.Application.ViewModels
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? InactivatedAt { get; set; }
+        public UserSubscriptionDTO UserSubscriptionDTO { get; set; }
     }
 }
