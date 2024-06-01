@@ -14,6 +14,7 @@ namespace EducationPlatform.Application.Mappers
         public VideoLessonMapper()
         {
             CreateMap<VideoLesson, VideoLessonViewModel>();
+            CreateMap<VideoLesson, VideoLessonDetailsViewModel>();
         }
     }
 }

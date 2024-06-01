@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationPlatform.API", "EducationPlatform.API\EducationPlatform.API.csproj", "{9D6D02EC-86B3-4D76-92CB-5D0E9F5A4DFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EducationPlatform.API", "EducationPlatform.API\EducationPlatform.API.csproj", "{9D6D02EC-86B3-4D76-92CB-5D0E9F5A4DFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationPlatform.Core", "EducationPlatform.Core\EducationPlatform.Core.csproj", "{DBC9E452-3AF0-4E7C-BEB7-F4AA9DA346A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EducationPlatform.Core", "EducationPlatform.Core\EducationPlatform.Core.csproj", "{DBC9E452-3AF0-4E7C-BEB7-F4AA9DA346A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationPlatform.Infrastructure", "EducationPlatform.Infrastructure\EducationPlatform.Infrastructure.csproj", "{FDF706B1-4DB0-4A64-9847-23239177E7D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EducationPlatform.Infrastructure", "EducationPlatform.Infrastructure\EducationPlatform.Infrastructure.csproj", "{FDF706B1-4DB0-4A64-9847-23239177E7D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationPlatform.Application", "EducationPlatform.Application\EducationPlatform.Application.csproj", "{F3F3D095-911F-4510-B6FB-743FC497747F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EducationPlatform.Application", "EducationPlatform.Application\EducationPlatform.Application.csproj", "{F3F3D095-911F-4510-B6FB-743FC497747F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EducationPlatform.UnitTests", "EducationPlatform.UnitTests\EducationPlatform.UnitTests.csproj", "{1F8785F1-18F9-4AEC-87DB-6BA63CECEB06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F3F3D095-911F-4510-B6FB-743FC497747F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3F3D095-911F-4510-B6FB-743FC497747F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3F3D095-911F-4510-B6FB-743FC497747F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F8785F1-18F9-4AEC-87DB-6BA63CECEB06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F8785F1-18F9-4AEC-87DB-6BA63CECEB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F8785F1-18F9-4AEC-87DB-6BA63CECEB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F8785F1-18F9-4AEC-87DB-6BA63CECEB06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
