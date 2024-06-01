@@ -15,6 +15,18 @@ namespace EducationPlatform.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
+        public User(string fullName, string document, string email, string password, string phone, DateTime birthDate)
+        {
+            FullName = fullName;
+            Document = document;
+            Email = email;
+            Password = password;
+            Phone = phone;
+            BirthDate = birthDate;
+            Active = true;
+            CreatedAt = DateTime.Now;
+        }
+
         public int Id { get; set; }
         public string FullName { get; set; }
         public string Document { get; set; }

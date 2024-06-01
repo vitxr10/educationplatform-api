@@ -9,6 +9,10 @@ namespace EducationPlatform.Application.Commands.UserCommands
 {
     public class DeleteUserCommand : IRequest
     {
+        public DeleteUserCommand()
+        {
+        }
+
         public DeleteUserCommand(int id)
         {
             Id = id;

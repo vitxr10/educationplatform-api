@@ -9,9 +9,10 @@ namespace EducationPlatform.Application.Commands.UserCommands
 {
     public class UpdateUserCommand : IRequest
     {
-        public UpdateUserCommand(int id)
+        public UpdateUserCommand(string email, string phone)
         {
-            Id = id;
+            Email = email;
+            Phone = phone;
         }
 
         public int Id { get; set; }
