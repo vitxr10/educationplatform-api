@@ -1,12 +1,13 @@
 # API REST de uma plataforma de cursos online
 
 ## Funcionalidades e componentes do projeto: 
-- ✅ CRUD Usuário 
-- ⏳ CRUD Assinatura (em andamento) 
+- CRUD Usuário 
+- CRUD Assinatura
 - CRUD Curso 
 - CRUD Módulo 
 - CRUD Aula 
-- Autenticação e autorização JWT 
+- Autenticação e autorização JWT
+- Validar dados de entrada com FluentValidation 
 - Integração com a Vimeo API para upload de videoaulas 
 - Integração com gateway de pagamento (Asaas) 
 - Microsserviço de pagamentos + Mensageria RabbitMQ
