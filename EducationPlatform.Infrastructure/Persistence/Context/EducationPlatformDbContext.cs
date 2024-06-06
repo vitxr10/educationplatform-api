@@ -16,6 +16,7 @@ namespace EducationPlatform.Infrastructure.Persistence.Context
         public DbSet<User> Users { get; set; }
         public DbSet<UserSubscription> UsersSubscriptions { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Core.Entities.Module> Modules { get; set; }
         public DbSet<VideoLesson> VideoLessons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -21,6 +21,7 @@ namespace EducationPlatform.Core.Entities
 
         public int Id { get; set; }
         public long? VimeoVideoId { get; set; }
+        public int ModuleId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string VideoLink { get; set; }
@@ -29,6 +30,7 @@ namespace EducationPlatform.Core.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? InactivatedAt { get; set; }
+        public Module Module { get; set; }
 
         public void Update(string name, string description)
         {

@@ -23,6 +23,7 @@ namespace EducationPlatform.Core.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? InactivatedAt { get; set; }
+        public List<Module> Modules { get; set; }
 
         public void Update(string name, string description, string cover)
         {

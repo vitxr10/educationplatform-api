@@ -1,7 +1,6 @@
 ﻿using EducationPlatform.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Infrastructure.Persistence.Configurations
 {
-    public class CourseConfigurations : IEntityTypeConfiguration<Course>
+    public class ModuleConfigurations : IEntityTypeConfiguration<Module>
     {
-        public void Configure(EntityTypeBuilder<Course> builder)
+        public void Configure(EntityTypeBuilder<Module> builder)
         {
-            builder.HasKey(c => c.Id);
+            builder.HasKey(m => m.Id);
 
             builder
-                .HasMany(c => c.Modules)
-                .WithOne(m => m.Course)
+                .HasMany(m => m.VideoLessons)
+                .WithOne(v => v.Module)
+                .HasForeignKey(v => v.ModuleId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
