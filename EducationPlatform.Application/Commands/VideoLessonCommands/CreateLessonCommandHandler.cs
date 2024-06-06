@@ -1,6 +1,6 @@
-﻿using EducationPlatform.Application.Services;
-using EducationPlatform.Core.Entities;
+﻿using EducationPlatform.Core.Entities;
 using EducationPlatform.Core.Repositories;
+using EducationPlatform.Infrastructure.Services.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;

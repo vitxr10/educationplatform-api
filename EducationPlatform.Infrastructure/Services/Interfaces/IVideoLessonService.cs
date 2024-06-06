@@ -1,8 +1,7 @@
-﻿
-using EducationPlatform.Application.DTOs;
+﻿using EducationPlatform.Infrastructure.DTOs;
 using Microsoft.AspNetCore.Http;
 
-namespace EducationPlatform.Application.Services
+namespace EducationPlatform.Infrastructure.Services.Interfaces
 {
     public interface IVideoLessonService
     {

@@ -1,9 +1,10 @@
 using EducationPlatform.Application.Commands.UserCommands;
 using EducationPlatform.Application.Mappers;
-using EducationPlatform.Application.Services;
 using EducationPlatform.Core.Repositories;
 using EducationPlatform.Infrastructure.Persistence.Context;
 using EducationPlatform.Infrastructure.Persistence.Repositories;
+using EducationPlatform.Infrastructure.Services.Implementations;
+using EducationPlatform.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 

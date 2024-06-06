@@ -1,4 +1,4 @@
-﻿using EducationPlatform.Application.DTOs;
+﻿using EducationPlatform.Infrastructure.DTOs;
 using MediaToolkit.Model;
 using MediaToolkit;
 using Microsoft.AspNetCore.Http;
@@ -13,8 +13,9 @@ using System.Threading.Tasks;
 using System.Web;
 using VimeoDotNet;
 using VimeoDotNet.Net;
+using EducationPlatform.Infrastructure.Services.Interfaces;
 
-namespace EducationPlatform.Application.Services
+namespace EducationPlatform.Infrastructure.Services.Implementations
 {
     public class VideoLessonService : IVideoLessonService
     {

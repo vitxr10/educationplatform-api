@@ -1,13 +1,8 @@
-﻿using EducationPlatform.Application.Commands.UserCommands;
-using EducationPlatform.Application.Commands.VideoLessonCommands;
+﻿using EducationPlatform.Application.Commands.VideoLessonCommands;
 using EducationPlatform.Application.Exceptions;
-using EducationPlatform.Application.Queries.UserQueries;
 using EducationPlatform.Application.Queries.VideoLessonQueries;
-using EducationPlatform.Application.Services;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EducationPlatform.API.Controllers
 {
