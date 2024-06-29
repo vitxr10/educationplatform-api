@@ -26,9 +26,9 @@ namespace EducationPlatform.Infrastructure.Persistence.Repositories
             return module.Id;
         }
 
-        public async Task<List<Module>> GetAllAsync(string? queryString)
+        public async Task<List<Module>> GetByCourseIdAsync(int id)
         {
-            return await _dbContext.Modules.ToListAsync();
+            return await _dbContext.Modules.Where(m => m.CourseId == id).ToListAsync();
         }
 
         public async Task<Module> GetByIdAsync(int id)

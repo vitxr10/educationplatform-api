@@ -18,8 +18,4 @@
     <ProjectReference Include="..\EducationPlatform.Infrastructure\EducationPlatform.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\ModuleQueries\" />
-  </ItemGroup>
-
 </Project>

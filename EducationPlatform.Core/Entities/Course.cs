@@ -16,6 +16,7 @@ namespace EducationPlatform.Core.Entities
         }
 
         public int Id { get; set; }
+        public int SubscriptionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Cover { get; set; }
@@ -23,6 +24,7 @@ namespace EducationPlatform.Core.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? InactivatedAt { get; set; }
+        public Subscription Subscription { get; set; }
         public List<Module> Modules { get; set; }
 
         public void Update(string name, string description, string cover)

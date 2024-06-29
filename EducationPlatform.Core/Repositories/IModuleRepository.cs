@@ -9,7 +9,7 @@ namespace EducationPlatform.Core.Repositories
 {
     public interface IModuleRepository
     {
-        Task<List<Module>> GetAllAsync(string? stringQuery);
+        Task<List<Module>> GetByCourseIdAsync(int id);
         Task<Module> GetByIdAsync(int id);
         Task<int> CreateAsync(Module module);
         Task SaveAsync();

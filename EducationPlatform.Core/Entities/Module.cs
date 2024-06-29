@@ -9,7 +9,7 @@ namespace EducationPlatform.Core.Entities
 {
     public class Module
     {
-        public Module(bool active, DateTime createdAt)
+        public Module()
         {
             Active = true;
             CreatedAt = DateTime.Now;

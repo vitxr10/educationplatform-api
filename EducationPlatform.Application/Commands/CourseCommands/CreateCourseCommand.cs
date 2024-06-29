@@ -9,6 +9,7 @@ namespace EducationPlatform.Application.Commands.CourseCommands
 {
     public class CreateCourseCommand : IRequest<int>
     {
+        public int SubscriptionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Cover { get; set; }

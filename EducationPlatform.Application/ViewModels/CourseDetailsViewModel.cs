@@ -9,6 +9,7 @@ namespace EducationPlatform.Application.ViewModels
     public class CourseDetailsViewModel
     {
         public int Id { get; set; }
+        public int SubscriptionId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Cover { get; set; }
