@@ -1,10 +1,7 @@
-﻿using EducationPlatform.Application.Commands.CourseCommands;
-using EducationPlatform.Application.Commands.ModuleCommands;
+﻿using EducationPlatform.Application.Commands.ModuleCommands;
 using EducationPlatform.Application.Exceptions;
-using EducationPlatform.Application.Queries.CourseQueries;
 using EducationPlatform.Application.Queries.ModuleQueries;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EducationPlatform.API.Controllers
