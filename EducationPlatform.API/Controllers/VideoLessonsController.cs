@@ -2,6 +2,7 @@
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.VideoLessonQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EducationPlatform.API.Controllers
@@ -17,6 +18,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetAllVideoLessonsQuery();
@@ -27,6 +29,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -45,6 +48,7 @@ namespace EducationPlatform.API.Controllers
 
         [HttpPost]
         [DisableRequestSizeLimit]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Post(CreateVideoLessonCommand command)
         {
             try
@@ -64,6 +68,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Put(int id, UpdateVideoLessonCommand command)
         {
             try
@@ -81,6 +86,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             try

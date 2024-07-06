@@ -4,6 +4,7 @@ using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.CourseQueries;
 using EducationPlatform.Application.Queries.VideoLessonQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet]
+        [Authorize (Roles = "Administrator")]
         public async Task<IActionResult> GetAll(string? StringQuery)
         {
             var query = new GetAllCoursesQuery(StringQuery);
@@ -30,6 +32,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -47,6 +50,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Post(CreateCourseCommand command)
         {
             try
@@ -62,6 +66,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Put(int id, UpdateCourseCommand command)
         {
             try
@@ -79,6 +84,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             try

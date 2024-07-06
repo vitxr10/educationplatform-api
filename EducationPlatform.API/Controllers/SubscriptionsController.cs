@@ -3,6 +3,7 @@ using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.SubscriptionQueries;
 using EducationPlatform.Core.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetAll(string? StringQuery)
         {
             var query = new GetAllSubscriptionsQuery(StringQuery);
@@ -29,6 +31,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet("users/{id}")]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetAllByUserId(int id)
         {
             var query = new GetAllSubscriptionsByUserIdQuery(id);
@@ -39,6 +42,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -56,6 +60,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Post(CreateSubscriptionCommand command)
         {
             try
@@ -71,6 +76,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Put(int id, UpdateSubscriptionCommand command)
         {
             try
@@ -88,6 +94,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             try

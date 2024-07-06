@@ -2,6 +2,7 @@
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.ModuleQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EducationPlatform.API.Controllers
@@ -17,6 +18,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet("course/{id}")]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetByCourseId(int id)
         {
             var query = new GetModulesByCourseIdQuery(id);
@@ -27,6 +29,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -44,6 +47,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Post(CreateModuleCommand command)
         {
             try
@@ -59,6 +63,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Put(int id, UpdateModuleCommand command)
         {
             try
@@ -76,6 +81,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             try

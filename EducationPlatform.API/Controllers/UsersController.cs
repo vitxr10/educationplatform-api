@@ -2,6 +2,7 @@
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.UserQueries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -19,6 +20,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> GetAll(string? stringQuery)
         {
             var query = new GetAllUsersQuery();
@@ -30,6 +32,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -47,6 +50,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Post(CreateUserCommand command)
         {
             var id = await _mediatR.Send(command);
@@ -55,6 +59,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
             try
@@ -72,6 +77,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
             try
