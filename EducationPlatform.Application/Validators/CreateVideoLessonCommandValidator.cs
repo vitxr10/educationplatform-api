@@ -14,7 +14,7 @@ namespace EducationPlatform.Application.Validators
         public CreateVideoLessonCommandValidator()
         {
             RuleFor(v => v.ModuleId)
-                .GreaterThan(0).WithMessage("O Id do módulo não pode ser negativo ou igual a zero");
+                .GreaterThanOrEqualTo(0).WithMessage("O Id do módulo não pode ser negativo.");
 
             RuleFor(v => v.Name)
                 .NotNull().WithMessage("O preenchimento do nome é obrigatório.")

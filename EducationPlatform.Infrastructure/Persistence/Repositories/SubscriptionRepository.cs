@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VimeoDotNet.Models;
 
 namespace EducationPlatform.Infrastructure.Persistence.Repositories
 {
@@ -29,6 +30,15 @@ namespace EducationPlatform.Infrastructure.Persistence.Repositories
         public async Task<List<Subscription>> GetAllAsync(string? queryString)
         {
             return await _dbContext.Subscriptions.ToListAsync();
+        }
+
+        public async Task<List<Subscription>> GetAllByUserIdAsync(int userId)
+        {
+            return await _dbContext.UsersSubscriptions
+                .Where(us => us.UserId == userId)
+                .Include(us => us.Subscription)
+                .Select(us => us.Subscription)
+                .ToListAsync();
         }
 
         public async Task<Subscription> GetByIdAsync(int id)

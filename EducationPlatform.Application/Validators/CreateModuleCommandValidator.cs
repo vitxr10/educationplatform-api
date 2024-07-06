@@ -13,7 +13,7 @@ namespace EducationPlatform.Application.Validators
         public CreateModuleCommandValidator()
         {
             RuleFor(m => m.CourseId)
-                .GreaterThan(0).WithMessage("O Id do curso não pode ser negativo ou igual a zero");
+                .GreaterThanOrEqualTo(0).WithMessage("O Id do curso não pode ser negativo.");
 
             RuleFor(m => m.Name)
                 .NotNull().WithMessage("O preenchimento do nome é obrigatório.")

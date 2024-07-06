@@ -40,6 +40,9 @@ namespace EducationPlatform.Application.Validators
                 .NotNull().WithMessage("O preenchimento da data de nascimento é obrigatório.")
                 .NotEmpty().WithMessage("O preenchimento da data de nascimento é obrigatório.")
                 .LessThan(DateTime.Now).WithMessage("Data de nascimento inválida.");
+
+            RuleFor(u => u.SubscriptionId)
+                .GreaterThanOrEqualTo(0).WithMessage("O Id da assinatura não pode ser negativo.");
         }
 
         public static bool ValidCPF(string cpf)

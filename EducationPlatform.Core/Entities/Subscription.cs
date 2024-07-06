@@ -22,6 +22,7 @@ namespace EducationPlatform.Core.Entities
         public DateTime? UpdatedAt { get; set; }
         public DateTime? InactivatedAt { get; set; }
         public List<Course> Courses { get; set; }
+        public List<UserSubscription> UsersSubscriptions { get; set; }
 
         public void Delete()
         {

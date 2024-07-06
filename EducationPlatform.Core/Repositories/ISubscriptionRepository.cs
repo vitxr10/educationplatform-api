@@ -10,6 +10,7 @@ namespace EducationPlatform.Core.Repositories
     public interface ISubscriptionRepository
     {
         Task<List<Subscription>> GetAllAsync(string? stringQuery);
+        Task<List<Subscription>> GetAllByUserIdAsync(int id);
         Task<Subscription> GetByIdAsync(int id);
         Task<int> CreateAsync(Subscription subscription);
         Task SaveAsync();
