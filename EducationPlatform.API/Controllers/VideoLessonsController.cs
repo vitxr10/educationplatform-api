@@ -45,11 +45,22 @@ namespace EducationPlatform.API.Controllers
 
         [HttpPost]
         [DisableRequestSizeLimit]
-        public async Task<IActionResult> Post(CreateLessonCommand command)
+        public async Task<IActionResult> Post(CreateVideoLessonCommand command)
         {
-            var id = await _mediatR.Send(command);
+            try
+            {
+                var id = await _mediatR.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id }, command);
+                return CreatedAtAction(nameof(GetById), new { id }, command);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Não foi possível cadastrar a videoaula.");
+            }
         }
 
         [HttpPut("{id}")]

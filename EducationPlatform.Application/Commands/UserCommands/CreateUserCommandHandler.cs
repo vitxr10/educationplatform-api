@@ -26,6 +26,7 @@ namespace EducationPlatform.Application.Commands.UserCommands
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = _mapper.Map<User>(request);
+            user.Role = "Aluno";
 
             var id = await _userRepository.CreateAsync(user);
 

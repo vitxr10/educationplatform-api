@@ -10,13 +10,14 @@ namespace EducationPlatform.Core.Entities
 {
     public class VideoLesson
     {
-        public VideoLesson(long? vimeoVideoId, string name, string description, string videoLink, int durationInSeconds)
+        public VideoLesson(long? vimeoVideoId, string name, string description, string videoLink, int durationInSeconds, int moduleId)
         {
             VimeoVideoId = vimeoVideoId;
             Name = name;
             Description = description;
             VideoLink = videoLink;
             DurationInSeconds = durationInSeconds;
+            ModuleId = moduleId;
         }
 
         public int Id { get; set; }

@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.VideoLessonCommands
 {
-    public class CreateLessonCommand : IRequest<int>
+    public class CreateVideoLessonCommand : IRequest<int>
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public IFormFile Video { get; set; }
+        public int ModuleId { get; set; }
     }
 }

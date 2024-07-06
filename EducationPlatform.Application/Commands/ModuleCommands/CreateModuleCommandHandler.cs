@@ -28,7 +28,7 @@ namespace EducationPlatform.Application.Commands.ModuleCommands
             var course = await _courseRepository.GetByIdAsync(request.CourseId);
 
             if (course == null)
-                throw new NotFoundException("Curso não encontrado.");
+                throw new NotFoundException("Curso");
 
             var module = _mapper.Map<Module>(request);
 

@@ -49,9 +49,16 @@ namespace EducationPlatform.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CreateCourseCommand command)
         {
-            var id = await _mediatR.Send(command);
+            try
+            {
+                var id = await _mediatR.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id }, command);
+                return CreatedAtAction(nameof(GetById), new { id }, command);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]

@@ -1,3 +1,4 @@
+using EducationPlatform.Application.Commands.SubscriptionCommands;
 using EducationPlatform.Application.Commands.UserCommands;
 using EducationPlatform.Application.Mappers;
 using EducationPlatform.Core.Repositories;
@@ -5,6 +6,7 @@ using EducationPlatform.Infrastructure.Persistence.Context;
 using EducationPlatform.Infrastructure.Persistence.Repositories;
 using EducationPlatform.Infrastructure.Services.Implementations;
 using EducationPlatform.Infrastructure.Services.Interfaces;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +33,9 @@ builder.Services.AddMediatR(options => options.RegisterServicesFromAssemblyConta
 
 // autoMapper
 builder.Services.AddAutoMapper(typeof(UserMapper));
+
+// fluentValidation
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserCommand>());
 
 // interfaces
 builder.Services.AddScoped<IUserRepository, UserRepository>();
