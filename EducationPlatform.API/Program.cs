@@ -81,7 +81,8 @@ builder.Services.Configure<FormOptions>(x =>
 });
 
 // context
-builder.Services.AddDbContext<EducationPlatformDbContext>(options => options.UseInMemoryDatabase("EducationPlatformDb"));
+var connectionString = builder.Configuration.GetConnectionString("EducationPlatformDb");
+builder.Services.AddDbContext<EducationPlatformDbContext>(options => options.UseSqlServer(connectionString));
 
 // mediatR
 builder.Services.AddMediatR(options => options.RegisterServicesFromAssemblyContaining(typeof(CreateUserCommand)));
