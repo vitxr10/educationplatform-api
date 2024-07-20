@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.ViewModels
 {
-    public record UserViewModel(
-        int Id,
-        string FullName,
-        string Document,
-        string Email,
-        string Phone,
-        bool Active,
-        UserSubscriptionDTO UserSubscriptionDTO
-    );
+    public record UserViewModel {
+        public UserViewModel()
+        {
+            
+        }
+        public int Id { get; set; }
+        public string FullName { get; set; }
+        public string Document { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public bool Active { get; set; }
+        public UserSubscriptionDTO UserSubscriptionDTO { get; set; }
+    }
 }

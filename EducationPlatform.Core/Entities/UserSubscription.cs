@@ -9,6 +9,11 @@ namespace EducationPlatform.Core.Entities
 {
     public class UserSubscription
     {
+        public UserSubscription()
+        {
+            
+        }
+
         public UserSubscription(int userId, int subscriptionId, SubscriptionStatusEnum status, DateTime startDate, DateTime expirationDate)
         {
             UserId = userId;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Core.Entities;
 using EducationPlatform.Core.Enums;
 using EducationPlatform.Core.Repositories;
@@ -12,22 +13,29 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.UserCommands
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
+    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, ServiceResult<int>>
     {
+        private readonly ISubscriptionRepository _subscriptionRepository;
         private readonly IUserRepository _userRepository;
         private readonly IUserSubscriptionRepository _userSubscriptionRepository;
         private readonly IAuthService _authService;
         private readonly IMapper _mapper;
-        public CreateUserCommandHandler(IUserRepository userRepository, IUserSubscriptionRepository userSubscriptionRepository, IAuthService authService, IMapper mapper)
+        public CreateUserCommandHandler(ISubscriptionRepository subscriptionRepository, IUserRepository userRepository, IUserSubscriptionRepository userSubscriptionRepository, IAuthService authService, IMapper mapper)
         {
+            _subscriptionRepository = subscriptionRepository;
             _userRepository = userRepository;
             _userSubscriptionRepository = userSubscriptionRepository;
             _authService = authService;
             _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<int>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            var subscription = await _subscriptionRepository.GetByIdAsync(request.SubscriptionId);
+
+            if (subscription == null)
+                return ServiceResult<int>.Error("Assinatura não encontrada", ErrorTypeEnum.NotFound);
+
             var user = _mapper.Map<User>(request);
 
             user.Role = "Student";
@@ -37,7 +45,7 @@ namespace EducationPlatform.Application.Commands.UserCommands
 
             var userSubscription = new UserSubscription
                 (
-                    user.Id,
+                    id,
                     request.SubscriptionId,
                     SubscriptionStatusEnum.Pending,
                     DateTime.Now,
@@ -46,7 +54,7 @@ namespace EducationPlatform.Application.Commands.UserCommands
 
             await _userSubscriptionRepository.CreateAsync(userSubscription);
 
-            return id;
+            return ServiceResult<int>.Success(id);
         }
     }
 }

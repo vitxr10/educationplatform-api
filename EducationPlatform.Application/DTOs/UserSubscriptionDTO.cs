@@ -9,6 +9,10 @@ namespace EducationPlatform.Application.DTOs
 {
     public class UserSubscriptionDTO
     {
+        public UserSubscriptionDTO()
+        {
+            
+        }
         public UserSubscriptionDTO(int subscriptionId, SubscriptionStatusEnum status, DateTime startDate, DateTime expirationDate)
         {
             SubscriptionId = subscriptionId;

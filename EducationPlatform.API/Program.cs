@@ -101,6 +101,7 @@ builder.Services.AddScoped<IUserSubscriptionRepository, UserSubscriptionReposito
 builder.Services.AddScoped<IModuleRepository, ModuleRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+builder.Services.AddScoped<IUserLessonsCompletedRepository, UserLessonsCompletedRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();

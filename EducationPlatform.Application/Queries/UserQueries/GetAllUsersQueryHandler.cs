@@ -1,14 +1,7 @@
 ﻿using AutoMapper;
-using EducationPlatform.Application.DTOs;
-using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.ViewModels;
 using EducationPlatform.Core.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.UserQueries
 {

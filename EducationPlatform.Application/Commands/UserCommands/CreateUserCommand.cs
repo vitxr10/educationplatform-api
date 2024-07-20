@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using EducationPlatform.Application.Common;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.UserCommands
 {
-    public class CreateUserCommand : IRequest<int>
+    public class CreateUserCommand : IRequest<ServiceResult<int>>
     {
         public string FullName { get; set; }
         public string Document { get; set; }

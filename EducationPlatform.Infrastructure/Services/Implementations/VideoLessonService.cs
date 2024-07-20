@@ -3,14 +3,6 @@ using MediaToolkit.Model;
 using MediaToolkit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 using VimeoDotNet;
 using VimeoDotNet.Net;
 using EducationPlatform.Infrastructure.Services.Interfaces;
@@ -27,6 +19,35 @@ namespace EducationPlatform.Infrastructure.Services.Implementations
             _configuration = configuration;
             _accessToken = _configuration["Services:VimeoConfigurations:AccessToken"];
             _vimeoClient = new VimeoClient(_accessToken);
+        }
+
+        public async Task<VimeoVideoDTO> GetVideoInfo(string videoUrl)
+        {
+            var videoId = ExtractVideoId(videoUrl);
+            if (string.IsNullOrEmpty(videoId))
+            {
+                throw new Exception("Video ID não pôde ser extraído do link fornecido.");
+            }
+
+            try
+            {
+                var video = await _vimeoClient.GetVideoAsync(long.Parse(videoId));
+                var vimeoVideoDTO = new VimeoVideoDTO(video.Id, video.Link, video.Duration);
+
+                return vimeoVideoDTO;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao obter informações do vídeo: {ex.Message}");
+            }
+        }
+
+        public string ExtractVideoId(string url)
+        {
+            // Extraindo o ID do vídeo do URL
+            var uri = new Uri(url);
+            var segments = uri.Segments;
+            return segments.Length > 1 ? segments[1].TrimEnd('/') : string.Empty;
         }
 
         public async Task<VimeoVideoDTO> UploadVideo(IFormFile file)

@@ -67,6 +67,20 @@ namespace EducationPlatform.API.Controllers
             }
         }
 
+        [HttpPost("{id}")]
+        [Authorize(Roles = "Administrator, Student")]
+        public async Task<IActionResult> Finish(int id, FinishVideoLessonCommand command)
+        {
+            command.VideoLessonId = id;
+
+            var result = await _mediatR.Send(command);
+
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return NoContent();
+        }
+
         [HttpPut("{id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Put(int id, UpdateVideoLessonCommand command)

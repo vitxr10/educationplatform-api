@@ -29,7 +29,7 @@ namespace EducationPlatform.Infrastructure.Persistence.Repositories
 
         public async Task<List<User>> GetAllAsync(string? stringQuery)
         {
-            return await _dbContext.Users.Include(u => u.UserSubscription).ToListAsync();
+            return await _dbContext.Users.Where(u => u.Role.Equals("Student")).Include(u => u.UserSubscription).ToListAsync();
         }
 
         public async Task<User> GetByEmailAndPasswordAsync(string email, string password)

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace EducationPlatform.Infrastructure.Migrations
+namespace EducationPlatform.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(EducationPlatformDbContext))]
     partial class EducationPlatformDbContextModelSnapshot : ModelSnapshot
@@ -186,6 +186,40 @@ namespace EducationPlatform.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("EducationPlatform.Core.Entities.UserLessonsCompleted", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ConclusionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("Nota")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VideoLessonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.HasIndex("VideoLessonId");
+
+                    b.ToTable("UserLessonsCompleted");
+                });
+
             modelBuilder.Entity("EducationPlatform.Core.Entities.UserSubscription", b =>
                 {
                     b.Property<int>("Id")
@@ -289,6 +323,29 @@ namespace EducationPlatform.Infrastructure.Migrations
                     b.Navigation("Course");
                 });
 
+            modelBuilder.Entity("EducationPlatform.Core.Entities.UserLessonsCompleted", b =>
+                {
+                    b.HasOne("EducationPlatform.Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EducationPlatform.Core.Entities.User", null)
+                        .WithMany("UserLessonsCompleted")
+                        .HasForeignKey("UserId1");
+
+                    b.HasOne("EducationPlatform.Core.Entities.VideoLesson", "VideoLesson")
+                        .WithMany()
+                        .HasForeignKey("VideoLessonId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("VideoLesson");
+                });
+
             modelBuilder.Entity("EducationPlatform.Core.Entities.UserSubscription", b =>
                 {
                     b.HasOne("EducationPlatform.Core.Entities.Subscription", "Subscription")
@@ -338,6 +395,8 @@ namespace EducationPlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("EducationPlatform.Core.Entities.User", b =>
                 {
+                    b.Navigation("UserLessonsCompleted");
+
                     b.Navigation("UserSubscription")
                         .IsRequired();
                 });

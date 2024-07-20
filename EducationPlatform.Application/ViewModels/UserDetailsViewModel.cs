@@ -8,17 +8,23 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.ViewModels
 {
-    public record UserDetailsViewModel(
-        int Id,
-        string FullName,
-        string Document,
-        string Email,
-        string Phone,
-        DateTime BirthDate,
-        bool Active,
-        DateTime CreatedAt,
-        DateTime? UpdatedAt,
-        DateTime? InactivatedAt,
-        UserSubscriptionDTO UserSubscriptionDTO
-    );
+    public record UserDetailsViewModel 
+    {
+        public UserDetailsViewModel()
+        {
+            
+        }
+
+        public int Id {  get; set; }
+        public string FullName { get; set; }
+        public string Document { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public DateTime BirthDate { get; set; }
+        public bool Active { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? InactivatedAt { get; set; }
+        public UserSubscriptionDTO UserSubscriptionDTO { get; set; }
+    }
 }

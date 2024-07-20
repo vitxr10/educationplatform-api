@@ -26,8 +26,8 @@ namespace EducationPlatform.Application.Validators
 
             RuleFor(x => x.Video)
                 .NotEmpty().WithMessage("O cadastro vídeo é obrigatório.")
-                .NotNull().WithMessage("O cadastro vídeo é obrigatório.")
-                .Must(BeAMp4Video).WithMessage("O arquivo deve ser um vídeo mp4.");
+                .NotNull().WithMessage("O cadastro vídeo é obrigatório.");
+                //.Must(BeAMp4Video).WithMessage("O arquivo deve ser um vídeo mp4.");
         }
 
         private bool BeAMp4Video(IFormFile file)

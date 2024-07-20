@@ -1,4 +1,5 @@
 ﻿using EducationPlatform.Application.Commands.UserCommands;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.UserQueries;
 using MediatR;
@@ -53,9 +54,15 @@ namespace EducationPlatform.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Post(CreateUserCommand command)
         {
-            var id = await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id }, command);
+            if (result.ErrorTypeEnum == ErrorTypeEnum.NotFound)
+                return NotFound(result.Message);
+
+            if (result.ErrorTypeEnum == ErrorTypeEnum.Failure)
+                return BadRequest(result.Message);
+
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
         }
 
         [HttpPut("{id}")]

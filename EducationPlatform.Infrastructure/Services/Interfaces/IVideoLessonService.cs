@@ -6,6 +6,7 @@ namespace EducationPlatform.Infrastructure.Services.Interfaces
     public interface IVideoLessonService
     {
         Task<int> GetVideoDuration(IFormFile file);
+        Task<VimeoVideoDTO> GetVideoInfo(string videolink);
         Task<VimeoVideoDTO> UploadVideo(IFormFile file);
     }
 }

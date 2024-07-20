@@ -31,7 +31,7 @@ namespace EducationPlatform.Application.Commands.VideoLessonCommands
             if (module == null) 
                 throw new NotFoundException("Módulo");
 
-            var vimeoVideoDTO = await _videoLessonService.UploadVideo(request.Video);
+            var vimeoVideoDTO = await _videoLessonService.GetVideoInfo(request.Video);
 
             var videoLesson = new VideoLesson(vimeoVideoDTO.ClipId, request.Name, request.Description, vimeoVideoDTO.ClipUri, vimeoVideoDTO.Duration, request.ModuleId);
 

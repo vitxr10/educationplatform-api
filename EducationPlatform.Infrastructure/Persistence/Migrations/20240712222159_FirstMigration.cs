@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace EducationPlatform.Infrastructure.Migrations
+namespace EducationPlatform.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class FirstMigration : Migration
