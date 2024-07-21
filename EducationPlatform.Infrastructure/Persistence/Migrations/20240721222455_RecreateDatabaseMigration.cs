@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EducationPlatform.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class RecreateDatabaseMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -160,6 +160,34 @@ namespace EducationPlatform.Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserLessonsCompleted",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    VideoLessonId = table.Column<int>(type: "int", nullable: false),
+                    Nota = table.Column<int>(type: "int", nullable: true),
+                    ConclusionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLessonsCompleted", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserLessonsCompleted_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserLessonsCompleted_VideoLessons_VideoLessonId",
+                        column: x => x.VideoLessonId,
+                        principalTable: "VideoLessons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_SubscriptionId",
                 table: "Courses",
@@ -169,6 +197,16 @@ namespace EducationPlatform.Infrastructure.Persistence.Migrations
                 name: "IX_Modules_CourseId",
                 table: "Modules",
                 column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLessonsCompleted_UserId",
+                table: "UserLessonsCompleted",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLessonsCompleted_VideoLessonId",
+                table: "UserLessonsCompleted",
+                column: "VideoLessonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersSubscriptions_SubscriptionId",
@@ -190,6 +228,9 @@ namespace EducationPlatform.Infrastructure.Persistence.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "UserLessonsCompleted");
+
             migrationBuilder.DropTable(
                 name: "UsersSubscriptions");
 

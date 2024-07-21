@@ -14,6 +14,12 @@ namespace EducationPlatform.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<VideoLesson> builder)
         {
             builder.HasKey(vl => vl.Id);
+
+            builder
+                .HasMany(v => v.UserLessonsCompleted)
+                .WithOne(ul => ul.VideoLesson)
+                .HasForeignKey(ul => ul.VideoLessonId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

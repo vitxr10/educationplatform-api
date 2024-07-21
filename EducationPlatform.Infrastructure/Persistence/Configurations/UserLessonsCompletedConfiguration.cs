@@ -15,16 +15,7 @@ namespace EducationPlatform.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(ul => ul.Id);
 
-            builder
-                .HasOne(ul => ul.User)
-                .WithMany()
-                .HasForeignKey(ul => ul.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(ul => ul.VideoLesson)
-                .WithMany()
-                .HasForeignKey(ul => ul.VideoLessonId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.ToTable("UserLessonsCompleted");
         }
     }
 }

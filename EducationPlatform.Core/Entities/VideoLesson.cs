@@ -32,6 +32,7 @@ namespace EducationPlatform.Core.Entities
         public DateTime? UpdatedAt { get; set; }
         public DateTime? InactivatedAt { get; set; }
         public Module Module { get; set; }
+        public List<UserLessonsCompleted> UserLessonsCompleted { get; set; }
 
         public void Update(string name, string description)
         {

@@ -203,9 +203,6 @@ namespace EducationPlatform.Infrastructure.Persistence.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("VideoLessonId")
                         .HasColumnType("int");
 
@@ -213,11 +210,9 @@ namespace EducationPlatform.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("UserId1");
-
                     b.HasIndex("VideoLessonId");
 
-                    b.ToTable("UserLessonsCompleted");
+                    b.ToTable("UserLessonsCompleted", (string)null);
                 });
 
             modelBuilder.Entity("EducationPlatform.Core.Entities.UserSubscription", b =>
@@ -326,17 +321,13 @@ namespace EducationPlatform.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("EducationPlatform.Core.Entities.UserLessonsCompleted", b =>
                 {
                     b.HasOne("EducationPlatform.Core.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("UserLessonsCompleted")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("EducationPlatform.Core.Entities.User", null)
-                        .WithMany("UserLessonsCompleted")
-                        .HasForeignKey("UserId1");
-
                     b.HasOne("EducationPlatform.Core.Entities.VideoLesson", "VideoLesson")
-                        .WithMany()
+                        .WithMany("UserLessonsCompleted")
                         .HasForeignKey("VideoLessonId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -399,6 +390,11 @@ namespace EducationPlatform.Infrastructure.Persistence.Migrations
 
                     b.Navigation("UserSubscription")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EducationPlatform.Core.Entities.VideoLesson", b =>
+                {
+                    b.Navigation("UserLessonsCompleted");
                 });
 #pragma warning restore 612, 618
         }

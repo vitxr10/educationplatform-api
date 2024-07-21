@@ -20,7 +20,13 @@ namespace EducationPlatform.Infrastructure.Persistence.Configurations
                 .WithOne(us => us.User)
                 .HasForeignKey<UserSubscription>(us => us.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
+            builder
+                .HasMany(u => u.UserLessonsCompleted)
+                .WithOne(ul => ul.User)
+                .HasForeignKey(ul => ul.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }
