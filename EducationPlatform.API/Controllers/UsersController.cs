@@ -1,12 +1,9 @@
 ﻿using EducationPlatform.Application.Commands.UserCommands;
 using EducationPlatform.Application.Common;
-using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.UserQueries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EducationPlatform.API.Controllers
 {

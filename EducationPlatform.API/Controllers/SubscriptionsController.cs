@@ -1,10 +1,7 @@
 ﻿using EducationPlatform.Application.Commands.SubscriptionCommands;
-using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.SubscriptionQueries;
-using EducationPlatform.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EducationPlatform.API.Controllers

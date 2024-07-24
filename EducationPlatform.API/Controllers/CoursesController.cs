@@ -1,11 +1,7 @@
 ﻿using EducationPlatform.Application.Commands.CourseCommands;
-using EducationPlatform.Application.Commands.VideoLessonCommands;
-using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.CourseQueries;
-using EducationPlatform.Application.Queries.VideoLessonQueries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EducationPlatform.API.Controllers

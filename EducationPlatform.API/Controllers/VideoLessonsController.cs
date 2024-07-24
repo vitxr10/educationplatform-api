@@ -1,6 +1,5 @@
 ﻿using EducationPlatform.Application.Commands.VideoLessonCommands;
 using EducationPlatform.Application.Common;
-using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.VideoLessonQueries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
