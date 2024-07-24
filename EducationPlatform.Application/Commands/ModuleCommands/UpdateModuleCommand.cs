@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using EducationPlatform.Application.Common;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.ModuleCommands
 {
-    public class UpdateModuleCommand : IRequest
+    public class UpdateModuleCommand : IRequest<ServiceResult>
     {
         public UpdateModuleCommand(int id)
         {

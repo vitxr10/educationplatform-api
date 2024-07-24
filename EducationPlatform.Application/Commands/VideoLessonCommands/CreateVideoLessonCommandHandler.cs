@@ -1,4 +1,5 @@
-﻿using EducationPlatform.Application.Exceptions;
+﻿using EducationPlatform.Application.Common;
+using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Core.Entities;
 using EducationPlatform.Core.Repositories;
 using EducationPlatform.Infrastructure.Persistence.Repositories;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.VideoLessonCommands
 {
-    public class CreateVideoLessonCommandHandler : IRequestHandler<CreateVideoLessonCommand, int>
+    public class CreateVideoLessonCommandHandler : IRequestHandler<CreateVideoLessonCommand, ServiceResult<int>>
     {
         private readonly IVideoLessonService _videoLessonService;
         private readonly IVideoLessonRepository _videoLessonRepository;
@@ -24,18 +25,20 @@ namespace EducationPlatform.Application.Commands.VideoLessonCommands
             _moduleRepository = moduleRepository;
         }
 
-        public async Task<int> Handle(CreateVideoLessonCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<int>> Handle(CreateVideoLessonCommand request, CancellationToken cancellationToken)
         {
             var module = await _moduleRepository.GetByIdAsync(request.ModuleId);
 
-            if (module == null) 
-                throw new NotFoundException("Módulo");
+            if (module == null)
+                return ServiceResult<int>.Error("Módulo não encontrado.", ErrorTypeEnum.NotFound);
 
             var vimeoVideoDTO = await _videoLessonService.GetVideoInfo(request.Video);
 
             var videoLesson = new VideoLesson(vimeoVideoDTO.ClipId, request.Name, request.Description, vimeoVideoDTO.ClipUri, vimeoVideoDTO.Duration, request.ModuleId);
 
-            return await _videoLessonRepository.CreateAsync(videoLesson);
+            var id = await _videoLessonRepository.CreateAsync(videoLesson);
+
+            return ServiceResult<int>.Success(id);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.ViewModels;
 using EducationPlatform.Core.Repositories;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.ModuleQueries
 {
-    public class GetModuleByIdQueryHandler : IRequestHandler<GetModuleByIdQuery, ModuleDetailsViewModel>
+    public class GetModuleByIdQueryHandler : IRequestHandler<GetModuleByIdQuery, ServiceResult<ModuleDetailsViewModel>>
     {
         private readonly IModuleRepository _moduleRepository;
         private readonly IMapper _mapper;
@@ -21,16 +22,16 @@ namespace EducationPlatform.Application.Queries.ModuleQueries
             _mapper = mapper;
         }
 
-        public async Task<ModuleDetailsViewModel> Handle(GetModuleByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<ModuleDetailsViewModel>> Handle(GetModuleByIdQuery request, CancellationToken cancellationToken)
         {
             var module = await _moduleRepository.GetByIdAsync(request.Id);
 
             if (module == null)
-                throw new NotFoundException("Módulo não encontrado.");
+                return ServiceResult<ModuleDetailsViewModel>.Error("Módulo não encontrado.", ErrorTypeEnum.NotFound);
 
             var moduleDetailsViewModel = _mapper.Map<ModuleDetailsViewModel>(module);
 
-            return moduleDetailsViewModel;
+            return ServiceResult<ModuleDetailsViewModel>.Success(moduleDetailsViewModel);
         }
     }
 }

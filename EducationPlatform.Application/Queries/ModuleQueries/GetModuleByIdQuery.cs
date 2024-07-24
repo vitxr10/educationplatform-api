@@ -1,4 +1,5 @@
-﻿using EducationPlatform.Application.ViewModels;
+﻿using EducationPlatform.Application.Common;
+using EducationPlatform.Application.ViewModels;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.ModuleQueries
 {
-    public class GetModuleByIdQuery : IRequest<ModuleDetailsViewModel>
+    public class GetModuleByIdQuery : IRequest<ServiceResult<ModuleDetailsViewModel>>
     {
         public GetModuleByIdQuery(int id)
         {

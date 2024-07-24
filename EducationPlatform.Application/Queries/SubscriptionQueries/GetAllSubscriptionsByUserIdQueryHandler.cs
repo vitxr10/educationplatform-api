@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.ViewModels;
 using EducationPlatform.Core.Repositories;
 using MediatR;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.SubscriptionQueries
 {
-    public class GetAllSubscriptionsByUserIdQueryHandler : IRequestHandler<GetAllSubscriptionsByUserIdQuery, List<SubscriptionViewModel>>
+    public class GetAllSubscriptionsByUserIdQueryHandler : IRequestHandler<GetAllSubscriptionsByUserIdQuery, ServiceResult<List<SubscriptionViewModel>>
     {
         private readonly ISubscriptionRepository _subscriptionRepository;
         private readonly IMapper _mapper;
@@ -20,13 +21,13 @@ namespace EducationPlatform.Application.Queries.SubscriptionQueries
             _mapper = mapper;
         }
 
-        public async Task<List<SubscriptionViewModel>> Handle(GetAllSubscriptionsByUserIdQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<List<SubscriptionViewModel>>> Handle(GetAllSubscriptionsByUserIdQuery request, CancellationToken cancellationToken)
         {
             var subscriptions = await _subscriptionRepository.GetAllByUserIdAsync(request.UserId);
 
             var subscriptionsViewModel = _mapper.Map<List<SubscriptionViewModel>>(subscriptions);
 
-            return subscriptionsViewModel;
+            return ServiceResult<List<SubscriptionViewModel>>.Success(subscriptionsViewModel);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using EducationPlatform.Application.ViewModels;
+﻿using EducationPlatform.Application.Common;
+using EducationPlatform.Application.ViewModels;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.SubscriptionQueries
 {
-    public class GetAllSubscriptionsByUserIdQuery : IRequest<List<SubscriptionViewModel>>
+    public class GetAllSubscriptionsByUserIdQuery : IRequest<ServiceResult<List<SubscriptionViewModel>>>
     {
         public GetAllSubscriptionsByUserIdQuery(int userId)
         {

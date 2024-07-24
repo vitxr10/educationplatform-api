@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.ViewModels;
 using EducationPlatform.Core.Repositories;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.CourseQueries
 {
-    public class GetCourseByIdQueryHandler : IRequestHandler<GetCourseByIdQuery, CourseDetailsViewModel>
+    public class GetCourseByIdQueryHandler : IRequestHandler<GetCourseByIdQuery, ServiceResult<CourseDetailsViewModel>>
     {
         private readonly ICourseRepository _courseRepository;
         private readonly IMapper _mapper;
@@ -21,16 +22,16 @@ namespace EducationPlatform.Application.Queries.CourseQueries
             _mapper = mapper;
         }
 
-        public async Task<CourseDetailsViewModel> Handle(GetCourseByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<CourseDetailsViewModel>> Handle(GetCourseByIdQuery request, CancellationToken cancellationToken)
         {
             var course = await _courseRepository.GetByIdAsync(request.Id);
 
             if (course == null)
-                throw new NotFoundException("Curso não encontrado.");
+                return ServiceResult<CourseDetailsViewModel>.Error("Curso não encontrado.", ErrorTypeEnum.NotFound);
 
             var courseDetailsViewModel = _mapper.Map<CourseDetailsViewModel>(course);
 
-            return courseDetailsViewModel;
+            return ServiceResult<CourseDetailsViewModel>.Success(courseDetailsViewModel);
         }
     }
 }

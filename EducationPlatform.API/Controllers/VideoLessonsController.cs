@@ -1,4 +1,5 @@
 ﻿using EducationPlatform.Application.Commands.VideoLessonCommands;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.Queries.VideoLessonQueries;
 using MediatR;
@@ -23,27 +24,23 @@ namespace EducationPlatform.API.Controllers
         {
             var query = new GetAllVideoLessonsQuery();
 
-            var videoLessons = await _mediatR.Send(query);
+            var result = await _mediatR.Send(query);
 
-            return Ok(videoLessons);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                var query = new GetVideoLessonByIdQuery(id);
+            var query = new GetVideoLessonByIdQuery(id);
 
-                var user = await _mediatR.Send(query);
+            var result = await _mediatR.Send(query);
 
-                return Ok(user);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return Ok(result);
         }
 
         [HttpPost]
@@ -51,20 +48,15 @@ namespace EducationPlatform.API.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Post(CreateVideoLessonCommand command)
         {
-            try
-            {
-                var id = await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-                return CreatedAtAction(nameof(GetById), new { id }, command);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Não foi possível cadastrar a videoaula.");
-            }
+            if (result.ErrorTypeEnum == ErrorTypeEnum.NotFound)
+                return NotFound(result.Message);
+
+            if (result.ErrorTypeEnum == ErrorTypeEnum.Failure)
+                return BadRequest(result.Message);
+
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
         }
 
         [HttpPost("{id}")]
@@ -85,36 +77,28 @@ namespace EducationPlatform.API.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Put(int id, UpdateVideoLessonCommand command)
         {
-            try
-            {
-                command.Id = id;
+            command.Id = id;
 
-                await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-                return NoContent();
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                var command = new DeleteVideoLessonCommand(id);
+            var command = new DeleteVideoLessonCommand(id);
 
-                await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-                return NoContent();
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return NoContent();
         }
     }
 }

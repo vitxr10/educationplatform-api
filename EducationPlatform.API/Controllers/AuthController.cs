@@ -20,16 +20,12 @@ namespace EducationPlatform.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Auth(AuthCommand command)
         {
-            try
-            {
-                var authViewModel = await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-                return Ok(authViewModel);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Core.Entities;
 using EducationPlatform.Core.Repositories;
 using MediatR;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.SubscriptionCommands
 {
-    public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscriptionCommand, int>
+    public class CreateSubscriptionCommandHandler : IRequestHandler<CreateSubscriptionCommand, ServiceResult<int>>
     {
         private readonly ISubscriptionRepository _subscriptionRepository;
         private readonly IMapper _mapper;
@@ -20,11 +21,13 @@ namespace EducationPlatform.Application.Commands.SubscriptionCommands
             _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateSubscriptionCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<int>> Handle(CreateSubscriptionCommand request, CancellationToken cancellationToken)
         {
             var subscription = _mapper.Map<Subscription>(request);
 
-            return await _subscriptionRepository.CreateAsync(subscription);
+            var id = await _subscriptionRepository.CreateAsync(subscription);
+
+            return ServiceResult<int>.Success(id);
         }
     }
 }

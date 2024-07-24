@@ -1,4 +1,5 @@
-﻿using EducationPlatform.Application.Exceptions;
+﻿using EducationPlatform.Application.Common;
+using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Core.Repositories;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.UserCommands
 {
-    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
+    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ServiceResult>
     {
         private readonly IUserRepository _userRepository;
         public UpdateUserCommandHandler(IUserRepository userRepository)
@@ -17,16 +18,18 @@ namespace EducationPlatform.Application.Commands.UserCommands
             _userRepository = userRepository;
         }
 
-        public async Task Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetByIdAsync(request.Id);
 
             if (user == null)
-                throw new NotFoundException("Usuário");
+                return ServiceResult.Error("Usuário não encontrado.", ErrorTypeEnum.NotFound);
 
             user.Update(request.Email, request.Phone);
 
             await _userRepository.SaveAsync();
+
+            return ServiceResult.Success();
         }
     }
 }

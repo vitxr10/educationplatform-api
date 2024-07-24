@@ -27,27 +27,23 @@ namespace EducationPlatform.API.Controllers
             var query = new GetAllUsersQuery();
             query.StringQuery = stringQuery;
 
-            var users = await _mediatR.Send(query);
+            var result = await _mediatR.Send(query);
 
-            return Ok(users);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                var query = new GetUserByIdQuery(id);
+            var query = new GetUserByIdQuery(id);
 
-                var user = await _mediatR.Send(query);
+            var result = await _mediatR.Send(query);
 
-                return Ok(user);
-            }
-            catch(NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return Ok(result);
         }
 
         [HttpPost]
@@ -69,36 +65,28 @@ namespace EducationPlatform.API.Controllers
         [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> Put(int id, UpdateUserCommand command)
         {
-            try
-            {
-                command.Id = id;
+            command.Id = id;
 
-                await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-                return NoContent();
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                var command = new DeleteUserCommand(id);
+            var command = new DeleteUserCommand(id);
 
-                await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-                return NoContent();
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return NoContent();
         }
     }
 }

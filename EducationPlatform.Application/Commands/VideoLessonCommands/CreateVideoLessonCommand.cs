@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using EducationPlatform.Application.Common;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.VideoLessonCommands
 {
-    public class CreateVideoLessonCommand : IRequest<int>
+    public class CreateVideoLessonCommand : IRequest<ServiceResult<int>>
     {
         public string Name { get; set; }
         public string Description { get; set; }

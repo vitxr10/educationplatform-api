@@ -23,79 +23,63 @@ namespace EducationPlatform.API.Controllers
         {
             var query = new GetModulesByCourseIdQuery(id);
 
-            var modules = await _mediatR.Send(query);
+            var result = await _mediatR.Send(query);
 
-            return Ok(modules);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                var query = new GetModuleByIdQuery(id);
+            var query = new GetModuleByIdQuery(id);
 
-                var module = await _mediatR.Send(query);
+            var result = await _mediatR.Send(query);
 
-                return Ok(module);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return Ok(result);
         }
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Post(CreateModuleCommand command)
         {
-            try
-            {
-                var id = await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-                return CreatedAtAction(nameof(GetById), new { id }, command);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, command);
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Put(int id, UpdateModuleCommand command)
         {
-            try
-            {
-                command.Id = id;
+            command.Id = id;
 
-                await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-                return NoContent();
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                var command = new DeleteModuleCommand(id);
+            var command = new DeleteModuleCommand(id);
 
-                await _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
 
-                return NoContent();
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return NoContent();
         }
     }
 }

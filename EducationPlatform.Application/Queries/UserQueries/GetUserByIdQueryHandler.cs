@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.DTOs;
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.ViewModels;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.UserQueries
 {
-    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDetailsViewModel>
+    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, ServiceResult<UserDetailsViewModel>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -24,16 +25,16 @@ namespace EducationPlatform.Application.Queries.UserQueries
             _mapper = mapper;
         }
 
-        public async Task<UserDetailsViewModel> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<UserDetailsViewModel>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             var user = await _userRepository.GetByIdAsync(request.Id);
 
             if (user == null)
-                throw new NotFoundException("Usuário");
+                return ServiceResult<UserDetailsViewModel>.Error("Usuário não encontrado.", ErrorTypeEnum.NotFound);
 
             var userDetailsViewModel = _mapper.Map<UserDetailsViewModel>(user);
 
-            return userDetailsViewModel;
+            return ServiceResult<UserDetailsViewModel>.Success(userDetailsViewModel);
         }
     }
 }

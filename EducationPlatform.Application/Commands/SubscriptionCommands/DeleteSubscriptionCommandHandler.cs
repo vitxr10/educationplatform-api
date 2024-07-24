@@ -1,4 +1,5 @@
-﻿using EducationPlatform.Application.Exceptions;
+﻿using EducationPlatform.Application.Common;
+using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Core.Repositories;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.SubscriptionCommands
 {
-    public class DeleteSubscriptionCommandHandler : IRequestHandler<DeleteSubscriptionCommand>
+    public class DeleteSubscriptionCommandHandler : IRequestHandler<DeleteSubscriptionCommand, ServiceResult>
     {
         private readonly ISubscriptionRepository _subscriptionRepository;
         public DeleteSubscriptionCommandHandler(ISubscriptionRepository subscriptionRepository)
@@ -17,16 +18,18 @@ namespace EducationPlatform.Application.Commands.SubscriptionCommands
             _subscriptionRepository = subscriptionRepository;
         }
 
-        public async Task Handle(DeleteSubscriptionCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult> Handle(DeleteSubscriptionCommand request, CancellationToken cancellationToken)
         {
             var subscription = await _subscriptionRepository.GetByIdAsync(request.Id);
 
             if (subscription == null)
-                throw new NotFoundException("Assinatura");
+                return ServiceResult.Error("Assinatura não encontrada.", ErrorTypeEnum.NotFound);
 
             subscription.Delete();
 
             await _subscriptionRepository.SaveAsync();
+
+            return ServiceResult.Success();
         }
     }
 }

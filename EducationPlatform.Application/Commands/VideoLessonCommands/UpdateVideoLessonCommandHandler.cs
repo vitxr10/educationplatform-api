@@ -1,4 +1,5 @@
-﻿using EducationPlatform.Application.Exceptions;
+﻿using EducationPlatform.Application.Common;
+using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Core.Repositories;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.VideoLessonCommands
 {
-    public class UpdateVideoLessonCommandHandler : IRequestHandler<UpdateVideoLessonCommand>
+    public class UpdateVideoLessonCommandHandler : IRequestHandler<UpdateVideoLessonCommand, ServiceResult>
     {
         private readonly IVideoLessonRepository _videoLessonRepository;
         public UpdateVideoLessonCommandHandler(IVideoLessonRepository videoLessonRepository)
@@ -17,16 +18,18 @@ namespace EducationPlatform.Application.Commands.VideoLessonCommands
             _videoLessonRepository = videoLessonRepository;
         }
 
-        public async Task Handle(UpdateVideoLessonCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult> Handle(UpdateVideoLessonCommand request, CancellationToken cancellationToken)
         {
             var videoLesson = await _videoLessonRepository.GetByIdAsync(request.Id);
 
             if (videoLesson == null)
-                throw new NotFoundException("Videoaula não encontrada.");
+                return ServiceResult.Error("Videoaula não encontrada.", ErrorTypeEnum.NotFound);
 
             videoLesson.Update(request.Name, request.Description);
 
             await _videoLessonRepository.SaveAsync();
+
+            return ServiceResult.Success();
         }
     }
 }

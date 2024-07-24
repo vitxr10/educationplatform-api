@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.ViewModels;
 using EducationPlatform.Core.Repositories;
 using MediatR;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.CourseQueries
 {
-    public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, List<CourseViewModel>>
+    public class GetAllCoursesQueryHandler : IRequestHandler<GetAllCoursesQuery, ServiceResult<List<CourseViewModel>>>
     {
         private readonly ICourseRepository _courseRepository;
         private readonly IMapper _mapper;
@@ -20,13 +21,13 @@ namespace EducationPlatform.Application.Queries.CourseQueries
             _mapper = mapper;
         }
 
-        public async Task<List<CourseViewModel>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<List<CourseViewModel>>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
         {
             var courses = await _courseRepository.GetAllAsync(request.StringQuery);
 
             var coursesViewModel = _mapper.Map<List<CourseViewModel>>(courses);
 
-            return coursesViewModel;
+            return ServiceResult<List<CourseViewModel>>.Success(coursesViewModel);
         }
     }
 }

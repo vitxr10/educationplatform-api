@@ -1,4 +1,5 @@
-﻿using EducationPlatform.Application.ViewModels;
+﻿using EducationPlatform.Application.Common;
+using EducationPlatform.Application.ViewModels;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.VideoLessonQueries
 {
-    public class GetVideoLessonByIdQuery : IRequest<VideoLessonDetailsViewModel>
+    public class GetVideoLessonByIdQuery : IRequest<ServiceResult<VideoLessonDetailsViewModel>>
     {
         public GetVideoLessonByIdQuery(int id)
         {

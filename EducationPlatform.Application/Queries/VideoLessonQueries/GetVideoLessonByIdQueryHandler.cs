@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.ViewModels;
 using EducationPlatform.Core.Repositories;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.VideoLessonQueries
 {
-    public class GetVideoLessonByIdQueryHandler : IRequestHandler<GetVideoLessonByIdQuery, VideoLessonDetailsViewModel>
+    public class GetVideoLessonByIdQueryHandler : IRequestHandler<GetVideoLessonByIdQuery, ServiceResult<VideoLessonDetailsViewModel>>
     {
         private readonly IVideoLessonRepository _videoLessonRepository;
         private readonly IMapper _mapper;
@@ -20,16 +21,16 @@ namespace EducationPlatform.Application.Queries.VideoLessonQueries
             _videoLessonRepository = videoLessonRepository;
             _mapper = mapper;
         }
-        public async Task<VideoLessonDetailsViewModel> Handle(GetVideoLessonByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<VideoLessonDetailsViewModel>> Handle(GetVideoLessonByIdQuery request, CancellationToken cancellationToken)
         {
             var videoLesson = await _videoLessonRepository.GetByIdAsync(request.Id);
 
             if (videoLesson == null)
-                throw new NotFoundException("Videoaula não encontrada.");
+                return ServiceResult<VideoLessonDetailsViewModel>.Error("Videoaula não encontrada.", ErrorTypeEnum.NotFound);
 
             var videoLessonDetailsViewModel = _mapper.Map<VideoLessonDetailsViewModel>(videoLesson);
 
-            return videoLessonDetailsViewModel;
+            return ServiceResult<VideoLessonDetailsViewModel>.Success(videoLessonDetailsViewModel);
         }
     }
 }

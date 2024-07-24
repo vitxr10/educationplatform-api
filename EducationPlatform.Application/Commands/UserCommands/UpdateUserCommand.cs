@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using EducationPlatform.Application.Common;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.UserCommands
 {
-    public class UpdateUserCommand : IRequest
+    public class UpdateUserCommand : IRequest<ServiceResult>
     {
         public UpdateUserCommand(string email, string phone)
         {

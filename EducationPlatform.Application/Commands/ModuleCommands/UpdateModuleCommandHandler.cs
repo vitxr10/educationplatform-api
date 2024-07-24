@@ -1,4 +1,5 @@
-﻿using EducationPlatform.Application.Exceptions;
+﻿using EducationPlatform.Application.Common;
+using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Core.Repositories;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.ModuleCommands
 {
-    public class UpdateModuleCommandHandler : IRequestHandler<UpdateModuleCommand>
+    public class UpdateModuleCommandHandler : IRequestHandler<UpdateModuleCommand, ServiceResult>
     {
         private readonly IModuleRepository _moduleRepository;
         public UpdateModuleCommandHandler(IModuleRepository moduleRepository)
@@ -17,15 +18,18 @@ namespace EducationPlatform.Application.Commands.ModuleCommands
             _moduleRepository = moduleRepository;
         }
 
-        public async Task Handle(UpdateModuleCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult> Handle(UpdateModuleCommand request, CancellationToken cancellationToken)
         {
             var module = await _moduleRepository.GetByIdAsync(request.Id);
 
-            if (module == null) throw new NotFoundException("Módulo não encontrado.");
+            if (module == null)
+                return ServiceResult.Error("Módulo não encontrado.", ErrorTypeEnum.NotFound);
 
             module.Update(request.Name, request.Description);
 
             await _moduleRepository.SaveAsync();
+
+            return ServiceResult.Success();
         }
     }
 }

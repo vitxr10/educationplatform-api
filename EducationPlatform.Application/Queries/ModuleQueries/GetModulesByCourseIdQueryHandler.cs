@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.ViewModels;
 using EducationPlatform.Core.Repositories;
 using MediatR;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.ModuleQueries
 {
-    public class GetModulesByCourseIdQueryHandler : IRequestHandler<GetModulesByCourseIdQuery, List<ModuleViewModel>>
+    public class GetModulesByCourseIdQueryHandler : IRequestHandler<GetModulesByCourseIdQuery, ServiceResult<List<ModuleViewModel>>>
     {
         private readonly IModuleRepository _moduleRepository;
         private readonly IMapper _mapper;
@@ -20,13 +21,13 @@ namespace EducationPlatform.Application.Queries.ModuleQueries
             _mapper = mapper;
         }
 
-        public async Task<List<ModuleViewModel>> Handle(GetModulesByCourseIdQuery request, CancellationToken cancellationToken)
+        public async Task<ServiceResult<List<ModuleViewModel>>> Handle(GetModulesByCourseIdQuery request, CancellationToken cancellationToken)
         {
             var modules = await _moduleRepository.GetByCourseIdAsync(request.Id);
 
             var modulesViewModel = _mapper.Map<List<ModuleViewModel>>(modules);
 
-            return modulesViewModel;
+            return ServiceResult<List<ModuleViewModel>>.Success(modulesViewModel);
         }
     }
 }

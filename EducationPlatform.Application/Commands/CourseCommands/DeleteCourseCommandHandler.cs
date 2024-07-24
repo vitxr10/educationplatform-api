@@ -1,4 +1,5 @@
-﻿using EducationPlatform.Application.Exceptions;
+﻿using EducationPlatform.Application.Common;
+using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Core.Repositories;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Commands.CourseCommands
 {
-    public class DeleteCourseCommandHandler : IRequestHandler<DeleteCourseCommand>
+    public class DeleteCourseCommandHandler : IRequestHandler<DeleteCourseCommand, ServiceResult>
     {
         private readonly ICourseRepository _courseRepository;
         public DeleteCourseCommandHandler(ICourseRepository courseRepository)
@@ -17,16 +18,18 @@ namespace EducationPlatform.Application.Commands.CourseCommands
             _courseRepository = courseRepository;
         }
 
-        public async Task Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResult> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
             var course = await _courseRepository.GetByIdAsync(request.Id);
 
             if (course == null)
-                throw new NotFoundException("Curso não encontrado.");
+                return ServiceResult.Error("Curso não encontrado.", ErrorTypeEnum.NotFound);
 
             course.Delete();
 
             await _courseRepository.SaveAsync();
+
+            return ServiceResult.Success();
         }
     }
 }
