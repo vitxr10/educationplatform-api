@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EducationPlatform.Application.Queries.SubscriptionQueries
 {
-    public class GetAllSubscriptionsByUserIdQueryHandler : IRequestHandler<GetAllSubscriptionsByUserIdQuery, ServiceResult<List<SubscriptionViewModel>>
+    public class GetAllSubscriptionsByUserIdQueryHandler : IRequestHandler<GetAllSubscriptionsByUserIdQuery, ServiceResult<List<SubscriptionViewModel>>>
     {
         private readonly ISubscriptionRepository _subscriptionRepository;
         private readonly IUserRepository _userRepository;

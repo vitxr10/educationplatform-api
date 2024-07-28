@@ -10,6 +10,11 @@ namespace EducationPlatform.Core.Entities
 {
     public class VideoLesson
     {
+        public VideoLesson()
+        {
+            Active = true;
+            CreatedAt = DateTime.Now;
+        }
         public VideoLesson(long? vimeoVideoId, string name, string description, string videoLink, int durationInSeconds, int moduleId)
         {
             VimeoVideoId = vimeoVideoId;

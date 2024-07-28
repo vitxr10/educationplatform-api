@@ -1,5 +1,4 @@
 ﻿using EducationPlatform.Application.Common;
-using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Core.Repositories;
 using MediatR;
 using System;

@@ -43,6 +43,20 @@ namespace EducationPlatform.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{userId}/courses/{courseId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUserCourseProgress(int userId, int courseId)
+        {
+            var query = new GetUserCourseProgressQuery(userId, courseId);
+
+            var result = await _mediatR.Send(query);
+
+            if (!result.IsSuccess)
+                return NotFound(result.Message);
+
+            return Ok(new {progress = result.Data});
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Post(CreateUserCommand command)

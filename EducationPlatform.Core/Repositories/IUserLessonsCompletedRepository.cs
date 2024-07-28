@@ -10,5 +10,6 @@ namespace EducationPlatform.Core.Repositories
     public interface IUserLessonsCompletedRepository
     {
         Task CreateAsync(UserLessonsCompleted userLessonsCompleted);
+        Task<decimal> GetUserCourseProgressAsync(int userId, int courseId);
     }
 }

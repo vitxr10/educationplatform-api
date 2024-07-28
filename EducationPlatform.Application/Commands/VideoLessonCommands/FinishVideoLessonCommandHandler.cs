@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using EducationPlatform.Application.Common;
-using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Core.Entities;
 using EducationPlatform.Core.Repositories;
 using MediatR;

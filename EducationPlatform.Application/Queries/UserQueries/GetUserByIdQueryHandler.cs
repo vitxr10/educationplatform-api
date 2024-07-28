@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using EducationPlatform.Application.Common;
-using EducationPlatform.Application.DTOs;
-using EducationPlatform.Application.Exceptions;
 using EducationPlatform.Application.ViewModels;
 using EducationPlatform.Core.Entities;
 using EducationPlatform.Core.Repositories;
