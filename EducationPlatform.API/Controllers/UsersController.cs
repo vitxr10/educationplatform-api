@@ -1,6 +1,7 @@
 ﻿using EducationPlatform.Application.Commands.UserCommands;
 using EducationPlatform.Application.Common;
 using EducationPlatform.Application.Queries.UserQueries;
+using EducationPlatform.Infrastructure.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,11 @@ namespace EducationPlatform.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediatR;
-        public UsersController(IMediator mediatR)
+        private readonly IPaymentService _paymentService;
+        public UsersController(IMediator mediatR, IPaymentService paymentService)
         {
             _mediatR = mediatR;
+            _paymentService = paymentService;
         }
 
         [HttpGet]
@@ -44,7 +47,7 @@ namespace EducationPlatform.API.Controllers
         }
 
         [HttpGet("{userId}/courses/{courseId}")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator, Student")]
         public async Task<IActionResult> GetUserCourseProgress(int userId, int courseId)
         {
             var query = new GetUserCourseProgressQuery(userId, courseId);
