@@ -15,6 +15,15 @@ namespace EducationPlatform.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
+        public Module(int courseId, string name, string description)
+        {
+            CourseId = courseId;
+            Name = name;
+            Description = description;
+            Active = true;
+            CreatedAt = DateTime.Now;
+        }
+
         public int Id { get; set; }
         public int CourseId { get; set; }
         public string Name { get; set; }

@@ -24,7 +24,7 @@ namespace EducationPlatform.Application.Commands.UserCommands
             if (user == null)
                 return ServiceResult.Error("Usuário não encontrado.", ErrorTypeEnum.NotFound);
 
-            user.Inativate();
+            user.Delete();
             user.UserSubscription.Disable();
 
             await _userRepository.SaveAsync();

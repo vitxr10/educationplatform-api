@@ -10,6 +10,10 @@ namespace EducationPlatform.Application.Commands.SubscriptionCommands
 {
     public class DeleteSubscriptionCommand : IRequest<ServiceResult>
     {
+        public DeleteSubscriptionCommand()
+        {
+        }
+
         public DeleteSubscriptionCommand(int id)
         {
             Id = id;

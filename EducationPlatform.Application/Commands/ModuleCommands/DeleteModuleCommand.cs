@@ -10,6 +10,10 @@ namespace EducationPlatform.Application.Commands.ModuleCommands
 {
     public class DeleteModuleCommand : IRequest<ServiceResult>
     {
+        public DeleteModuleCommand()
+        {
+        }
+
         public DeleteModuleCommand(int id)
         {
             Id = id;

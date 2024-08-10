@@ -15,6 +15,16 @@ namespace EducationPlatform.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
+        public Course(int subscriptionId, string name, string description, string cover)
+        {
+            SubscriptionId = subscriptionId;
+            Name = name;
+            Description = description;
+            Cover = cover;
+            Active = true;
+            CreatedAt = DateTime.Now;
+        }
+
         public int Id { get; set; }
         public int SubscriptionId { get; set; }
         public string Name { get; set; }

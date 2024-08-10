@@ -14,6 +14,14 @@ namespace EducationPlatform.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
+        public Subscription(string name, int durationInDays)
+        {
+            Name = name;
+            DurationInDays = durationInDays;
+            Active = true;
+            CreatedAt = DateTime.Now;
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int DurationInDays { get; set; }

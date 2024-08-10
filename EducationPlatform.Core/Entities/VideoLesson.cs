@@ -23,6 +23,8 @@ namespace EducationPlatform.Core.Entities
             VideoLink = videoLink;
             DurationInSeconds = durationInSeconds;
             ModuleId = moduleId;
+            Active = true;
+            CreatedAt = DateTime.Now;
         }
 
         public int Id { get; set; }

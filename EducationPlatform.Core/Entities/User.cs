@@ -42,7 +42,7 @@ namespace EducationPlatform.Core.Entities
         public UserSubscription UserSubscription { get; set; }
         public List<UserLessonsCompleted> UserLessonsCompleted { get; set; }
 
-        public void Inativate()
+        public void Delete()
         {
             Active = false;
             InactivatedAt = DateTime.Now;

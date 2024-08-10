@@ -10,6 +10,10 @@ namespace EducationPlatform.Application.Commands.VideoLessonCommands
 {
     public class DeleteVideoLessonCommand : IRequest<ServiceResult>
     {
+        public DeleteVideoLessonCommand()
+        {
+        }
+
         public DeleteVideoLessonCommand(int id)
         {
             Id = id;
