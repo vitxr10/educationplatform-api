@@ -17,7 +17,7 @@ namespace EducationPlatform.UnitTests.Core.Entities
         public async void UserExists_Executed_UpdateUser()
         {
             // Arrange
-            var user = new User("Paulo Teste", "12345678901", "paulo@email.com", "123456", "11937433901", DateTime.Now);
+            var user = new User("Paulo Teste", "12345678901", "paulo@email.com", "123456", "11937433901", DateTime.Now, "student");
             var email = "updated@email.com";
             var phone = "40028922";
 
@@ -42,7 +42,7 @@ namespace EducationPlatform.UnitTests.Core.Entities
         public async void UserExists_Executed_DeleteUser()
         {
             // Arrange
-            var user = new User("Paulo Teste", "12345678901", "paulo@email.com", "123456", "11937433901", DateTime.Now);
+            var user = new User("Paulo Teste", "12345678901", "paulo@email.com", "123456", "11937433901", DateTime.Now, "student");
             var userSubscription = new UserSubscription(1, 1, SubscriptionStatusEnum.Active, DateTime.Now, DateTime.Now.AddDays(182));
             user.UserSubscription = userSubscription;
 

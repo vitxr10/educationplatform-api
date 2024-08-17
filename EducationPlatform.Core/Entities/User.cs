@@ -15,7 +15,7 @@ namespace EducationPlatform.Core.Entities
             CreatedAt = DateTime.Now;
         }
 
-        public User(string fullName, string document, string email, string password, string phone, DateTime birthDate)
+        public User(string fullName, string document, string email, string password, string phone, DateTime birthDate, string role)
         {
             FullName = fullName;
             Document = document;
@@ -25,6 +25,7 @@ namespace EducationPlatform.Core.Entities
             BirthDate = birthDate;
             Active = true;
             CreatedAt = DateTime.Now;
+            Role = role;
         }
 
         public int Id { get; set; }

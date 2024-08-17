@@ -1,6 +1,7 @@
 using EducationPlatform.Application.Commands.SubscriptionCommands;
 using EducationPlatform.Application.Commands.UserCommands;
 using EducationPlatform.Application.Mappers;
+using EducationPlatform.Core.Entities;
 using EducationPlatform.Core.Repositories;
 using EducationPlatform.Infrastructure.Persistence.Context;
 using EducationPlatform.Infrastructure.Persistence.Repositories;
@@ -84,6 +85,27 @@ builder.Services.Configure<FormOptions>(x =>
 var connectionString = builder.Configuration.GetConnectionString("EducationPlatformDb");
 builder.Services.AddDbContext<EducationPlatformDbContext>(options => options.UseSqlServer(connectionString));
 
+
+//builder.Services.AddDbContext<EducationPlatformDbContext>(options => options.UseInMemoryDatabase("Database"));
+//var dbContext = builder.Services.AddDbContext<EducationPlatformDbContext>(options => options.UseInMemoryDatabase("Database")).BuildServiceProvider().GetService<EducationPlatformDbContext>();
+
+
+//dbContext.Database.EnsureCreated();
+
+//var newUser = new User
+//{
+//    FullName = "ademar",
+//    Document = "19328324084",
+//    Email = "ademar@email.com",
+//    Password = "1b062911e0beee616a35fa27770513493742c099e1c7314af8f73eaca5c40aea",
+//    Phone = "11987655678",
+//    BirthDate = DateTime.Now.AddYears(-18),
+//    Role = "Administrator"
+//};
+
+//dbContext.Users.Add(newUser);
+//dbContext.SaveChanges();
+
 // mediatR
 builder.Services.AddMediatR(options => options.RegisterServicesFromAssemblyContaining(typeof(CreateUserCommand)));
 
@@ -106,6 +128,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 var app = builder.Build();
+
+app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
