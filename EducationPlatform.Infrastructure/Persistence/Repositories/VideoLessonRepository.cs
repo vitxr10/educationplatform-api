@@ -36,6 +36,11 @@ namespace EducationPlatform.Infrastructure.Persistence.Repositories
             return await _dbContext.VideoLessons.SingleOrDefaultAsync(vl => vl.Id == id);
         }
 
+        public async Task<List<VideoLesson>> GetByModuleIdAsync(int id)
+        {
+            return await _dbContext.VideoLessons.Where(vl => vl.ModuleId == id).ToListAsync();
+        }
+
         public async Task<VideoLesson> GetByVimeoIdAsync(long id)
         {
             return await _dbContext.VideoLessons.SingleOrDefaultAsync(vl => vl.VimeoVideoId == id);

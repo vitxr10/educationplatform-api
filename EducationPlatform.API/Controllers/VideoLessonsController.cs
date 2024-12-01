@@ -25,7 +25,7 @@ namespace EducationPlatform.API.Controllers
 
             var result = await _mediatR.Send(query);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [HttpGet("{id}")]
@@ -39,7 +39,18 @@ namespace EducationPlatform.API.Controllers
             if (!result.IsSuccess)
                 return NotFound(result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
+        }
+
+        [HttpGet("modules/{id}")]
+        [Authorize(Roles = "Administrator, Student")]
+        public async Task<IActionResult> GetByModuleId(int id)
+        {
+            var query = new GetVideoLessonsByModuleIdQuery(id);
+
+            var result = await _mediatR.Send(query);
+
+            return Ok(result.Data);
         }
 
         [HttpPost]

@@ -25,7 +25,7 @@ namespace EducationPlatform.API.Controllers
             if (!result.IsSuccess)
                 return BadRequest(result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
     }
 }

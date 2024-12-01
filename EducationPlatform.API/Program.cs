@@ -1,5 +1,6 @@
 using EducationPlatform.Application.Commands.SubscriptionCommands;
 using EducationPlatform.Application.Commands.UserCommands;
+using EducationPlatform.Application.Common;
 using EducationPlatform.Application.Mappers;
 using EducationPlatform.Core.Entities;
 using EducationPlatform.Core.Repositories;
@@ -126,6 +127,7 @@ builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 builder.Services.AddScoped<IUserLessonsCompletedRepository, UserLessonsCompletedRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IPdfService, PdfService>();
 
 var app = builder.Build();
 

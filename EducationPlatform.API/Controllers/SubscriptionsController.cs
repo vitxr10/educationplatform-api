@@ -24,7 +24,7 @@ namespace EducationPlatform.API.Controllers
 
             var result = await _mediatR.Send(query);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [HttpGet("users/{id}")]
@@ -38,7 +38,7 @@ namespace EducationPlatform.API.Controllers
             if (!result.IsSuccess)
                 return NotFound(result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [HttpGet("{id}")]
@@ -52,7 +52,7 @@ namespace EducationPlatform.API.Controllers
             if (!result.IsSuccess)
                 return NotFound(result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [HttpPost]

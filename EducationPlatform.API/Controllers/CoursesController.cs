@@ -24,7 +24,7 @@ namespace EducationPlatform.API.Controllers
 
             var result = await _mediatR.Send(query);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [HttpGet("{id}")]
@@ -38,7 +38,7 @@ namespace EducationPlatform.API.Controllers
             if (!result.IsSuccess)
                 return NotFound(result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [HttpPost]
@@ -77,6 +77,15 @@ namespace EducationPlatform.API.Controllers
 
             if (!result.IsSuccess)
                 return NotFound(result.Message);
+
+            return NoContent();
+        }
+
+        [HttpPost("generatecertificate")]
+        [Authorize(Roles = "Student")]
+        public async Task<IActionResult> GenerateCertificate(GenerateCourseCertificateCommand command)
+        {
+            var result = await _mediatR.Send(command);
 
             return NoContent();
         }

@@ -11,6 +11,7 @@ namespace EducationPlatform.Core.Repositories
     {
         Task<List<VideoLesson>> GetAllAsync();
         Task<VideoLesson> GetByIdAsync(int id);
+        Task<List<VideoLesson>> GetByModuleIdAsync(int id);
         Task<VideoLesson> GetByVimeoIdAsync(long id);
         Task<int> CreateAsync(VideoLesson videolesson);
         Task SaveAsync();

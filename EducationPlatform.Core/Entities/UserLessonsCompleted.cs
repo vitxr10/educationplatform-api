@@ -14,6 +14,7 @@ namespace EducationPlatform.Core.Entities
         }
         public int Id { get; set; }
         public int UserId { get; set; }
+        public int CourseId { get; set; }
         public int VideoLessonId { get; set; }
         public int? Nota { get; set; }
         public DateTime ConclusionDate { get; set; }
